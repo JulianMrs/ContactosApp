@@ -1,0 +1,36 @@
+<div class="container-fluid">
+    <div class="card border-light mb-3">
+        <div class="card-header">Contactos</div>
+        <div class="card-body">
+            <h5 class="card-title">Listado de Contactos</h5>
+            <div class="my-2 text-left">
+                <button [routerLink]="['/home/form']" class="btn btn-rounded btn-primary" type="button">Crear
+                    contacto</button>
+
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Telefono</th>
+                            <th>Tecnologias</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <tr *ngFor="let contacto of contactos">
+                            <td>{{contacto.nombre}}</td>
+                            <td>{{contacto.telefono}}</td>
+                            <td>{{contacto.tecnologias}}</td>
+                            <td>
+                                <button [routerLink]="['/home/form']" type="button" name="editar"
+                                    class="btn btn-primary btn-sm">Editar</button>
+                            </td>
+                            <td>
+                                <button type="button" class="btn btn-danger btn-sm" name="eliminar">Eliminar</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
