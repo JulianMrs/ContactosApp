@@ -1,10 +1,11 @@
 <div class="container-fluid">
-    <div class="card border-light mb-3">
+    <div class="card border-light mb-5">
         <div class="card-header">Contactos</div>
         <div class="card-body">
             <h5 class="card-title">Listado de Contactos</h5>
             <div class="my-2 text-left">
-                <button [routerLink]="['/home/form']" class="btn btn-rounded btn-primary" type="button">Crear
+                <button (click)="mostrarModalContact()" data-target="#modalForm" class="btn btn-rounded btn-primary"
+                    type="button">Crear
                     contacto</button>
 
                 <table class="table table-bordered table-striped">
@@ -17,15 +18,12 @@
                     </thead>
                     <tbody>
 
-                        <tr *ngFor="let contacto of contactos">
+                        <tr (click)="mostrarModalViewContact()" *ngFor="let contacto of contactos">
                             <td>{{contacto.nombre}}</td>
                             <td>{{contacto.telefono}}</td>
                             <td>{{contacto.tecnologias}}</td>
                             <td>
-                                <button [routerLink]="['/home/form']" type="button" name="editar"
-                                    class="btn btn-primary btn-sm">Editar</button>
-                            </td>
-                            <td>
+                                <button type="button" name="editar" class="btn btn-primary btn-sm">Editar</button>
                                 <button type="button" class="btn btn-danger btn-sm" name="eliminar">Eliminar</button>
                             </td>
                         </tr>
@@ -34,3 +32,136 @@
             </div>
         </div>
     </div>
+
+
+    <ng-template #myModalCreateContact let-modal>
+        <div class="card bg-dark text-white">
+
+            <div class="card-header">
+                Formulario de contacto
+            </div>
+            <div class="card-body">
+                <form>
+
+                    <div class="form-group">
+                        <label for="nombre" class="col-form-label col-sm-4">Nombre</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" [(ngModel)]="contacto.nombre" name="nombre">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="apellido" class="col-form-label col-sm-4">Apellido</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" [(ngModel)]="contacto.apellido" name="apellido">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email" class="col-form-label col-sm-4">Telefono</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" [(ngModel)]="contacto.telefono" name="email">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email" class="col-form-label col-sm-4">Direccion</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" [(ngModel)]="contacto.direccion" name="email">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email" class="col-form-label col-sm-6">Fecha de Nacimiento</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" [(ngModel)]="contacto.fechaNacimiento" name="email">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email" class="col-form-label col-sm-6">Tecnologias</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" [(ngModel)]="contacto.tecnologias" name="email">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-6">
+                            <button [routerLink]="['/home/contactos']" (click)='crearContacto()' class="btn btn-primary"
+                                role="button">Crear</button>
+
+
+                            <ng-template #elseBlock>
+                                <button class="btn btn-primary" role="button">Update</button>
+                            </ng-template>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+
+    </ng-template>
+
+    <ng-template #myModalViewContact let-modal>
+        <div class="card bg-dark text-white">
+
+            <div class="card-header">
+                Formulario de contacto
+            </div>
+            <div class="card-body">
+                <form>
+                    <tr *ngFor="let contacto of contactos">
+                        <div class="form-group">
+                            <label for="nombre" class="col-form-label col-sm-9">Nombre</label>
+                            <div class="col-sm-12">
+                                <input disabled="disabled" type="text" class="form-control" value={{contacto.nombre}}
+                                    name="nombre">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="apellido" class="col-form-label col-sm-9">Apellido</label>
+                            <div class="col-sm-12">
+                                <input disabled="disabled" type="text" class="form-control" value={{contacto.apellido}}
+                                    name="apellido">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email" class="col-form-label col-sm-9">Telefono</label>
+                            <div class="col-sm-12">
+                                <input disabled="disabled" type="text" class="form-control" value={{contacto.telefono}}
+                                    name="email">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email" class="col-form-label col-sm-9">Direccion</label>
+                            <div class="col-sm-12">
+                                <input disabled="disabled" type="text" class="form-control" value={{contacto.direccion}}
+                                    name="email">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email" class="col-form-label col-sm-12">Fecha de Nacimiento</label>
+                            <div class="col-sm-12">
+                                <input disabled="disabled" type="text" class="form-control"
+                                    value={{contacto.fechaNacimiento}} name="email">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email" class="col-form-label col-sm-9">Tecnologias</label>
+                            <div class="col-sm-12">
+                                <input disabled="disabled" type="text" class="form-control"
+                                    value={{contacto.tecnologias}} name="email">
+                            </div>
+                        </div>
+                    </tr>
+                </form>
+
+            </div>
+        </div>
+
+    </ng-template>

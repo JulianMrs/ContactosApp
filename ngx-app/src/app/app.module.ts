@@ -16,7 +16,6 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { ContactosComponent } from './contactos/contactos.component';
 import { RouterModule } from '@angular/router';
-import { FormComponent } from './contactos/form.component';
 
 @NgModule({
   imports: [
@@ -33,7 +32,7 @@ import { FormComponent } from './contactos/form.component';
     AuthModule,
     AppRoutingModule, // must be imported as the last module as it contains the fallback route
   ],
-  declarations: [AppComponent, ContactosComponent, FormComponent],
+  declarations: [AppComponent, ContactosComponent],
   providers: [],
   bootstrap: [AppComponent],
 })
